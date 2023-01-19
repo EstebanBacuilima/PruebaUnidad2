@@ -29,9 +29,9 @@ public class Cancion {
     @Column(name = "year")
     private Number year;
 
-    //References
+//    //References
     @JsonIgnore
-    @OneToMany(mappedBy = "cancion")
+    @ManyToMany(mappedBy = "cancion")
     private List<ListaReproduccion> listaReproduccions;
 
 }

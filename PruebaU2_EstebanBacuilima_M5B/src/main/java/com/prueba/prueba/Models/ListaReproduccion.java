@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Setter
 @Getter
@@ -21,8 +22,8 @@ public class ListaReproduccion {
     @Column(name = "descripcion")
     private String descripcion;
 
-    @ManyToOne
+    @ManyToMany
     @JoinColumn(name="idCancion",referencedColumnName ="idCancion")
-    private Cancion cancion;
+    private List<Cancion> cancion;
 
 }
