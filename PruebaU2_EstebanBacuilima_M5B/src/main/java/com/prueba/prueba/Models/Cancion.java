@@ -29,7 +29,7 @@ public class Cancion {
     @Column(name = "year")
     private Number year;
 
-//    //References
+    //References
     @JsonIgnore
     @ManyToMany(mappedBy = "cancion")
     private List<ListaReproduccion> listaReproduccions;

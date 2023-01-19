@@ -1,7 +1,9 @@
 package com.prueba.prueba.Controllers;
 
 import com.prueba.prueba.Models.Cancion;
+import com.prueba.prueba.Models.ListaReproduccion;
 import com.prueba.prueba.Services.CancionService;
+import com.prueba.prueba.Services.ListaReproduccionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
