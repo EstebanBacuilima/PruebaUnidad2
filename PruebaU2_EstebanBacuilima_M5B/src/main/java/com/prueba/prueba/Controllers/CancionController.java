@@ -18,6 +18,9 @@ public class CancionController {
     @Autowired
     CancionService cancionService;
 
+    @Autowired
+    ListaReproduccionService listaReproducionService;
+
     @GetMapping("/listar")
     public ResponseEntity<List<Cancion>> obtenerLista() {
         return new ResponseEntity<>(cancionService.findByAll(), HttpStatus.OK);

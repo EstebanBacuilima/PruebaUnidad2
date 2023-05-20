@@ -1,5 +1,6 @@
 package com.prueba.prueba.Controllers;
 
+import com.prueba.prueba.Models.Cancion;
 import com.prueba.prueba.Models.ListaReproduccion;
 import com.prueba.prueba.Services.ListaReproduccionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,17 +32,20 @@ public class ListaReproducionController {
         listaReproducionService.delete(id);
     }
 
-
-    @PutMapping("actualizar/{id}")
-    public ResponseEntity<ListaReproduccion> updateUser(@PathVariable Integer id, @RequestBody ListaReproduccion c) {
-        if (listaReproducionService.findById(id) == null) {
-            return ResponseEntity.notFound().build();
+    @PutMapping("/listcancion/update/{id}")
+    public ResponseEntity<ListaReproduccion> updateClientOTHER(@RequestBody ListaReproduccion listaReproduccion, @PathVariable("id") Integer id){
+        ListaReproduccion listarUp = listaReproducionService.findById(id);
+        if(listarUp == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }else{
+            try {
+                List<Cancion> currentSongs = listarUp.getCancion();
+                currentSongs.addAll(listaReproduccion.getCancion());
+                listarUp.setCancion(currentSongs);
+                return new ResponseEntity<>(listaReproducionService.save(listarUp), HttpStatus.CREATED);
+            }catch (Exception e){
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
         }
-        c.setNombre(c.getNombre());
-        c.setDescripcion(c.getDescripcion());
-        c.setCancion(c.getCancion());
-
-        ListaReproduccion newObjeto = listaReproducionService.save(c);
-        return ResponseEntity.ok(newObjeto);
     }
 }
